@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Auditor.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link rel="shortcut icon" href="~/Images/favicon.ico" />
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/Loader.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="BodyLoad()" onunload="BodyUnload()">
+    <div id="loaderBox">
+        <div class="loaderCircle"></div>
+    </div>
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/CustomUtilities.js") %>"></script>
+    <form runat="server" defaultbutton="btnDoNothing">
+        <div class="page">
+            <div class="header">
+                <div class="title">
+                    <h1>
+                        <asp:Label ID="lblAppName" runat="server" Text="Label"></asp:Label>
+                    </h1>
+                </div>
+                <div class="loginDisplay">
+                    <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                        <AnonymousTemplate>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <table style="border-spacing: 5px;">
+                                <tr style="vertical-align: middle;">
+                                    <td>
+                                        <b>
+                                            <asp:LoginName ID="HeadLoginName" runat="server" Font-Size="20px" />
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <asp:HyperLink ID="lnkChangePassword" ImageUrl="~/Images/password.png" CssClass="image"
+                                            ToolTip="Change password" NavigateUrl="~/Account/ChangePassword.aspx" runat="server"></asp:HyperLink>
+                                    </td>
+                                </tr>
+                            </table>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+                <div class="topmenu">
+                    <asp:Menu ID="submenu" runat="server" CssClass="submenu" Orientation="Horizontal" Style="display: block;" StaticPopOutImageUrl="~/Images/menu_arrow.png" DynamicPopOutImageUrl="~/Images/menu_arrow.png">
+                        <StaticMenuItemStyle VerticalPadding="10" HorizontalPadding="20" BorderStyle="Solid" BorderWidth="1" BorderColor="#31488d" BackColor="#31488d" ForeColor="White" />
+                        <StaticSelectedStyle VerticalPadding="10" HorizontalPadding="20" BorderStyle="Solid" BorderWidth="1" BorderColor="#e00025" BackColor="#e00025" ForeColor="White" />
+                        <DynamicMenuItemStyle VerticalPadding="10" HorizontalPadding="20" BorderStyle="Solid" BorderWidth="1" BorderColor="Gray" BackColor="Gray" ForeColor="White" />
+                        <DynamicSelectedStyle VerticalPadding="10" HorizontalPadding="20" BorderStyle="Solid" BorderWidth="1" BorderColor="#e00025" BackColor="#e00025" ForeColor="White" />
+                        <StaticHoverStyle BorderStyle="Solid" BorderWidth="1" BorderColor="Black" BackColor="Black" ForeColor="White" />
+                        <DynamicHoverStyle BorderStyle="Solid" BorderWidth="1" BorderColor="Black" BackColor="Black" ForeColor="White" />
+                        <Items>
+                            <asp:MenuItem Text="LOG IN/LOG OUT" NavigateUrl="~/Account/Login.aspx" Value="LOGIN"></asp:MenuItem>
+                            <asp:MenuItem Text="PERFORM AUDIT" NavigateUrl="~/Default.aspx" Value="AUDIT"></asp:MenuItem>
+                            <asp:MenuItem Text="AUDITS" NavigateUrl="~/BrowseAudits.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="ACTIONS" NavigateUrl="~/Actions.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="SCHEDULES" NavigateUrl="~/ViewSchedules.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="SETTINGS" NavigateUrl="~/Settings.aspx" Value="SETTINGS"></asp:MenuItem>
+                            <asp:MenuItem Text="MATRIX" NavigateUrl="~/Matrices/Matrix5sLPA.aspx"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </div>
+                <div class="logo" title="Auditor ">
+                </div>
+            </div>
+            <div class="main">
+                <asp:Button ID="btnDoNothing" runat="server" Enabled="false" Style="display: none;" />
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+    </form>
+</body>
+</html>
